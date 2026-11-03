@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: gym-management-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SecretKey
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+      - key: SENDER_EMAIL
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false

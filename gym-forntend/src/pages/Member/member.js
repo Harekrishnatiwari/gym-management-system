@@ -39,7 +39,7 @@ const Member = () => {
     }, [])
 
     const fetchData = async(skip,limit)=> {
-      await axios.get(`http://localhost:5000/members/all-member?skip=${skip}&limit=${limit}`,{withCredentials:true,}).then((res)=>{
+      await axios.get(`/api/members/all-member?skip=${skip}&limit=${limit}`,{withCredentials:true,}).then((res)=>{
         console.log(res)
         let totalData=res.data.totalMembers;
         setTotalData(totalData);
@@ -111,7 +111,7 @@ const Member = () => {
       if (search!=="")
       {
         setISSearchModeOn(true);
-       await axios.get(`http://localhost:5000/members/searched-members?searchTerm=${search}`,{withCredentials:true}).then((response)=>{
+       await axios.get(`/api/members/searched-members?searchTerm=${search}`,{withCredentials:true}).then((response)=>{
            console.log(response)
            setData(response.data.members)
            setTotalData(response.data.totalMembers)

@@ -33,7 +33,7 @@ const ForgotPassword = () => {
           }
 
           const changePassword =async()=>{
-            await  axios.post('http://localhost:5000/auth/reset-password',{email:inputField.email,newPassword:inputField.newPassword}).then((response)=>{
+            await  axios.post('/api/auth/reset-password',{email:inputField.email,newPassword:inputField.newPassword}).then((response)=>{
               setLoader(true);
                 
                 toast.success(response.data.message);
@@ -51,7 +51,7 @@ const ForgotPassword = () => {
 
           const verifyOTP = async()=>{
             setLoader(true);
-            await  axios.post('http://localhost:5000/auth/reset-password/checkOtp',{email:inputField.email,otp:inputField.otp}).then((response)=>{
+            await  axios.post('/api/auth/reset-password/checkOtp',{email:inputField.email,otp:inputField.otp}).then((response)=>{
                setOtpValidate(true)
                  setContentValue("Submit Your New Password")
                  toast.success(response.data.message);
@@ -70,7 +70,7 @@ const ForgotPassword = () => {
           }
 
           const sendOtp = async()=>{
-            await  axios.post('http://localhost:5000/auth/reset-password/sendOtp',{email:inputField.email}).then((response)=>{
+            await  axios.post('/api/auth/reset-password/sendOtp',{email:inputField.email}).then((response)=>{
               
                setEmailSubmit(true)
                  setContentValue("Submit Your OTP")

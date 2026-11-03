@@ -46,7 +46,7 @@ const[selectedOption,setSelectedOption] = useState("");
     
   }
   const fetchMembership = async()=>{
-    await axios.get('http://localhost:5000/plans/get-membership',{withCredentials: true}).then((res)=>{
+    await axios.get('/api/plans/get-membership',{withCredentials: true}).then((res)=>{
           // console.log(res);
           setMembershipList(res.data.membership)
           if(res.data.membership.length===0){
@@ -82,7 +82,7 @@ const[selectedOption,setSelectedOption] = useState("");
     };
 
     const handelRegisterButton=async()=>{
-      await axios.post('http://localhost:5000/members/register-member',inputField,{withCredentials: true}).then((response)=>{
+      await axios.post('/api/members/register-member',inputField,{withCredentials: true}).then((response)=>{
         toast.success("Added Successfully");
         setTimeout(() => {
           window.location.reload();

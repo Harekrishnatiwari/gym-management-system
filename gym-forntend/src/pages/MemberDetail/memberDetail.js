@@ -25,7 +25,7 @@ const MemberDetail = () => {
   },[])
 
   const fetchMembership =async()=>{
-    axios.get('http://localhost:5000/plans/get-membership',{withCredentials:true}).then((response)=>{
+    axios.get('/api/plans/get-membership',{withCredentials:true}).then((response)=>{
       setMembership(response.data.membership);
       setPlanMember(response.data.membership[0]._id);
 
@@ -36,7 +36,7 @@ const MemberDetail = () => {
   }
   const fetchData = async()=>{
 
-    await axios.get(`http://localhost:5000/members/get-member/${id}`,{withCredentials:true}).then((response)=>{
+    await axios.get(`/api/members/get-member/${id}`,{withCredentials:true}).then((response)=>{
       console.log(response)
     
       setData(response.data.member)
@@ -52,7 +52,7 @@ const MemberDetail = () => {
 
   const handleSwitchBtn = async () => {
     let statuss = status === "Active" ? "Pending" : "Active";
-    await axios.post(`http://localhost:5000/members/change-status/${id}`,{status:statuss},{withCredentials:true}).then((response)=>{
+    await axios.post(`/api/members/change-status/${id}`,{status:statuss},{withCredentials:true}).then((response)=>{
       toast.success("Status Changed")
     }).catch(err=>{
       console.log(err);
@@ -72,7 +72,7 @@ const MemberDetail = () => {
     setPlanMember(value);
   }
    const handelRenewSaveBtn =async()=>{
-    await axios.put(`http://localhost:5000/members/update-member-plan/${id}`,{membership:planMember},{withCredentials:true}).then((response)=>{
+    await axios.put(`/api/members/update-member-plan/${id}`,{membership:planMember},{withCredentials:true}).then((response)=>{
         
       setData(response.data.member)
       // setStatus(response.data.member.status)

@@ -46,7 +46,7 @@ exports.register = async (req, res) => {
 };
 const cookieOptions = {  
   httpOnly: true,
-  secure: false,  // set to true production
+  secure: process.env.NODE_ENV === 'production',
   sameSite:'Lax'
 }
 
@@ -59,7 +59,7 @@ exports.login = async (req, res) => {
     if (gym && (await bcrypt.compare(password, gym.password))) {
 
         const token = jwt.sign({gym_id:gym._id},process.env.JWT_SecretKey );
-        console.log("jwtToken",token  )
+
 
          res.cookie("cookie_token",token,cookieOptions)
       res.json({ message: "Logged in successfully", success: "true", gym, token });

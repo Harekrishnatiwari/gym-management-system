@@ -12,7 +12,7 @@ const Addmembership = ({handleClose}) => {
 
   }
   const fetchMembership = async()=>{
-    await axios.get('http://localhost:5000/plans/get-membership',{withCredentials: true}).then((res)=>{
+    await axios.get('/api/plans/get-membership',{withCredentials: true}).then((res)=>{
           // console.log(res);
           setMembership(res.data.membership)
           toast.success(res.data.membership.length + " Membership Fetched");
@@ -28,7 +28,7 @@ const Addmembership = ({handleClose}) => {
 
   const handleAddmembership = async()=>{
 
-    await axios.post('http://localhost:5000/plans/add-membership',inputField,{withCredentials: true}).then((res)=>{
+    await axios.post('/api/plans/add-membership',inputField,{withCredentials: true}).then((res)=>{
       toast.success(res.data.message);
       handleClose();
     }).catch(err=>{

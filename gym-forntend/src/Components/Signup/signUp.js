@@ -49,7 +49,7 @@ const SignUp = () => {
 
   
     const handleRegister = async()=> {
-     await axios.post('http://localhost:5000/auth/register',inputField).then((resp)=>{
+     await axios.post('/api/auth/register',inputField).then((resp)=>{
       
       const successMsg = resp.data.message;
       toast.success(successMsg);

@@ -15,7 +15,6 @@
     "react-scripts": "5.0.1",
     "react-switch": "^7.1.0",
     "react-toastify": "^11.0.5",
-    "tiwariapp": "file:",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
