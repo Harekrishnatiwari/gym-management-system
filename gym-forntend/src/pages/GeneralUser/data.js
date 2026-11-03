@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getMonthlyJoined = async () => {
     try{
-        const response = await axios.get('http://localhost:5000/members/monthly-members',{withCredentials:true});
+        const response = await axios.get('/api/members/monthly-members',{withCredentials:true});
     return response.data;
     } catch(error){
          console.error('Error fetching data:',error);
@@ -12,7 +12,7 @@ const getMonthlyJoined = async () => {
 
 const threeDayExpire = async () => {
     try{
-        const response = await axios.get('http://localhost:5000/members/within-3-days-expiring',{withCredentials:true});
+        const response = await axios.get('/api/members/within-3-days-expiring',{withCredentials:true});
     return response.data;
     } catch(error){
          console.error('Error fetching data:',error);
@@ -23,7 +23,7 @@ const threeDayExpire = async () => {
 
 const fourToSevenDaysExpire = async () => {
     try{
-        const response = await axios.get('http://localhost:5000/members/within-4-7-days-expiring',{withCredentials:true});
+        const response = await axios.get('/api/members/within-4-7-days-expiring',{withCredentials:true});
     return response.data;
     } catch(error){
          console.error('Error fetching data:',error);
@@ -33,7 +33,7 @@ const fourToSevenDaysExpire = async () => {
 
 const expired = async () => {
     try{
-        const response = await axios.get('http://localhost:5000/members/expired-member',{withCredentials:true});
+        const response = await axios.get('/api/members/expired-member',{withCredentials:true});
     return response.data;
     } catch(error){
          console.error('Error fetching data:',error);
@@ -42,7 +42,7 @@ const expired = async () => {
 }
 const inActiveMembers = async () => {
     try{
-        const response = await axios.get('http://localhost:5000/members/inactive-member',{withCredentials:true});
+        const response = await axios.get('/api/members/inactive-member',{withCredentials:true});
     return response.data;
     } catch(error){
          console.error('Error fetching data:',error);

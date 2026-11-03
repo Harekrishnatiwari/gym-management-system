@@ -1,56 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-  <BrowserRouter>
-  <App />
-  </BrowserRouter>
-   
-  </React.StrictMode>const express = require('express');
-const app = express();
+const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 require('dotenv').config();
-
-const PORT = process.env.PORT || 5000;
-
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-}));
+const connectDB = require('./DBConn/conn');
+const app = express();
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000').split(',').map(value => value.trim());
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
-
-require('./DBConn/conn');
-
-// Routes
-const GymRoutes = require('./Routes/gym');
-const MembershipRoutes = require('./Routes/membership');
-const MemberRoutes = require('./Routes/member');
-
-app.use('/auth', GymRoutes);
-app.use('/plans', MembershipRoutes);
-app.use('/members', MemberRoutes);
-
-// Optional error handler
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+app.use('/auth', require('./Routes/gym'));
+app.use('/plans', require('./Routes/membership'));
+app.use('/members', require('./Routes/member'));
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Internal Server Error');
+  console.error(err.message);
+  res.status(500).json({ error: 'Internal Server Error' });
 });
-
-app.listen(PORT, () => {
-    console.log(`🎉 Server is running on port ${PORT}`);
-});
-
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+async function start() {
+  if (!process.env.JWT_SecretKey) throw new Error('JWT_SecretKey is required');
+  await connectDB();
+  app.listen(process.env.PORT || 5000, '0.0.0.0', () => console.log('Gym API started'));
+}
+start().catch(err => { console.error(err.message); process.exit(1); });

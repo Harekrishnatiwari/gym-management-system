@@ -10,7 +10,7 @@ const Login = () => {
       const handleLogin = async()=>{
          sessionStorage.setItem("isLogin",true)
         //  navigate('/dashboard')
-        await axios.post('http://localhost:5000/auth/login',loginField,{withCredentials:true}).then((response)=>{
+        await axios.post('/api/auth/login',loginField,{withCredentials:true}).then((response)=>{
           console.log(response.data);
           localStorage.setItem('gymName',response.data.gym.gymName);
           localStorage.setItem('gymPic',response.data.gym.profilePic);
